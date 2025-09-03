@@ -15,26 +15,30 @@ export const goodsFromServer: string[] = [
   'Garlic',
 ];
 
+enum SortType {
+  Alphabet = 'alphabet',
+  Length = 'length',
+  None = '',
+}
+
 export const App: React.FC = () => {
   const [goods, setGoods] = useState<string[]>([...goodsFromServer]);
-  const [activeButton, setActiveButton] = useState<'alphabet' | 'length' | ''>(
-    '',
-  );
+  const [activeButton, setActiveButton] = useState<SortType>(SortType.None);
   const [reverse, setReverse] = useState<boolean>(false);
 
-  const sortAlphabetically = () => {
+  const handleSortAlphabetically = () => {
     setGoods([...goods].sort());
   };
 
-  const sortByLength = () => {
+  const handleSortByLength = () => {
     setGoods([...goods].sort((a, b) => a.length - b.length));
   };
 
-  const reverseList = () => {
+  const handleReverseList = () => {
     setGoods([...goods].reverse());
   };
 
-  const resetList = () => {
+  const handleResetList = () => {
     setGoods([...goodsFromServer]);
   };
 
@@ -45,8 +49,8 @@ export const App: React.FC = () => {
           type="button"
           className={`button is-info ${activeButton === 'alphabet' ? '' : 'is-light'}`}
           onClick={() => {
-            sortAlphabetically();
-            setActiveButton('alphabet');
+            handleSortAlphabetically();
+            setActiveButton(SortType.Alphabet);
           }}
         >
           Sort alphabetically
@@ -56,8 +60,8 @@ export const App: React.FC = () => {
           type="button"
           className={`button is-info ${activeButton === 'length' ? '' : 'is-light'}`}
           onClick={() => {
-            sortByLength();
-            setActiveButton('length');
+            handleSortByLength();
+            setActiveButton(SortType.Length);
           }}
         >
           Sort by length
@@ -67,7 +71,7 @@ export const App: React.FC = () => {
           type="button"
           className={`button is-info ${reverse ? '' : 'is-light'}`}
           onClick={() => {
-            reverseList();
+            handleReverseList();
             if (reverse) {
               setReverse(false);
             } else {
@@ -83,8 +87,8 @@ export const App: React.FC = () => {
             type="button"
             className="button is-danger is-light"
             onClick={() => {
-              resetList();
-              setActiveButton('');
+              handleResetList();
+              setActiveButton(SortType.None);
               setReverse(false);
             }}
           >
