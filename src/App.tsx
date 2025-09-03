@@ -47,7 +47,7 @@ export const App: React.FC = () => {
       <div className="buttons">
         <button
           type="button"
-          className={`button is-info ${activeButton === 'alphabet' ? '' : 'is-light'}`}
+          className={`button is-info ${activeButton === SortType.Alphabet ? '' : 'is-light'}`}
           onClick={() => {
             handleSortAlphabetically();
             setActiveButton(SortType.Alphabet);
@@ -58,7 +58,7 @@ export const App: React.FC = () => {
 
         <button
           type="button"
-          className={`button is-info ${activeButton === 'length' ? '' : 'is-light'}`}
+          className={`button is-info ${activeButton === SortType.Length ? '' : 'is-light'}`}
           onClick={() => {
             handleSortByLength();
             setActiveButton(SortType.Length);
@@ -82,7 +82,7 @@ export const App: React.FC = () => {
           Reverse
         </button>
 
-        {reverse || activeButton !== '' ? (
+        {reverse || activeButton !== SortType.None ? (
           <button
             type="button"
             className="button is-danger is-light"
